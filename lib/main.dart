@@ -25,7 +25,35 @@ class MyAppState extends State<MyApp> {
     print(questionIndex);
   }
 
-  var questions = ["Question1", "Question2"];
+  var questions = [
+    {
+      'questionText': 'What is the color of sky?',
+      'answer': [
+        'red',
+        'blue',
+        'green',
+        'yelllow',
+      ]
+    },
+    {
+      'questionText': 'Which is the current indian odi team captain?',
+      'answer': [
+        'rohit',
+        'kohli',
+        'kl rahul',
+        'ashwin',
+      ]
+    },
+    {
+      'questionText': 'How many months in a year?',
+      'answer': [
+        '9',
+        '10',
+        '11',
+        '12',
+      ]
+    },
+  ];
 
   build(BuildContext context) {
     return MaterialApp(
@@ -34,10 +62,10 @@ class MyAppState extends State<MyApp> {
         title: Text('My first app bar'),
       ),
       body: Column(children: [
-        Question(questions[questionIndex]),
-        Answer(answerQuestion),
-        Answer(answerQuestion),
-        Answer(answerQuestion),
+        Question(questions[questionIndex]["questionText"].toString()),
+        ...(questions[questionIndex]["answer"] as List<String>).map((answer) {
+          return Answer(answerQuestion, answer);
+        }).toList()
       ]),
     ));
   }
