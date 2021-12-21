@@ -61,12 +61,19 @@ class MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: Text('My first app bar'),
       ),
-      body: Column(children: [
-        Question(questions[questionIndex]["questionText"].toString()),
-        ...(questions[questionIndex]["answer"] as List<String>).map((answer) {
-          return Answer(answerQuestion, answer);
-        }).toList()
-      ]),
+      body: questionIndex < questions.length
+          ? Column(
+              children: [
+                Question(questions[questionIndex]["questionText"].toString()),
+                ...(questions[questionIndex]["answer"] as List<String>)
+                    .map((answer) {
+                  return Answer(answerQuestion, answer);
+                }).toList(),
+              ],
+            )
+          : Center(
+              child: Text('You did it'),
+            ),
     ));
   }
 }
